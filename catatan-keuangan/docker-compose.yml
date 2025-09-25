@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8081:80"
+    networks:
+      - mynet
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: keuangan
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123
+    networks:
+      - mynet
+    volumes:
+      - db_keuangan:/var/lib/mysql
+
+networks:
+  mynet:
+
+volumes:
+  db_keuangan:

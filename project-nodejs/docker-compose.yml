@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: nodejs-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123
+    volumes:
+      - nodejs_db:/var/lib/mysql
+  
+
+  app:
+    build: .
+    container_name: node-app
+    restart: always
+    ports:
+      - "8086:3000"
+    depends_on:
+      - db
+
+volumes:
+  nodejs_db:

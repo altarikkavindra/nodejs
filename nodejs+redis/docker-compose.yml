@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: akhir-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123
+    volumes:
+      - db_akhir:/var/lib/mysql
+    networks:
+      - networks
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build: .
+    container_name: akhir-app
+    depends_on:
+      db: 
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "3000:3000"
+    networks:
+      - networks
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - networks
+
+volumes:
+  db_akhir:
+
+networks:
+  networks:
