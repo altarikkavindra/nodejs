@@ -8,7 +8,7 @@ services:
       MYSQL_DATABASE: crud
       MYSQL_USER: user
       MYSQL_PASSWORD: 123
-    volume:
+    volumes:
       - crud_db:/var/lib/mysql
     networks:
       - mynet
