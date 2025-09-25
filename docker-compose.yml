@@ -25,7 +25,7 @@ services:
       - mynet
 
 volumes:
-  crud_db
+  crud_db:
 
 networks: 
-  mynet
+  mynet:
