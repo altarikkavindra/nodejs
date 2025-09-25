@@ -46,4 +46,4 @@ jobs:
           git pull origin main
           docker-compose up -d --build
           docker exec -it crud-db mysql -u user -p123
-          insert into crud.transaksi (id,keterangan,jumlah,tipe) values (1, "Beras", 50, "Masuk");
+          insert into crud.transaksi(id,keterangan,jumlah,tipe) values (1, "Beras", 50, "Masuk");
